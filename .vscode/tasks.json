@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile C++",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-g",
+        "${relativeFile}",
+        "-o",
+        "${fileBasenameNoExtension}.out"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Run C++ with Input & Time",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "clear && timeout 10 /usr/bin/time -v --output=sys.txt './${fileBasenameNoExtension}.out' < input.txt > output.txt && nm '${fileBasenameNoExtension}.out' > binary.txt && objdump -D '${fileBasenameNoExtension}.out' > disassemble.txt && rm '${fileBasenameNoExtension}.out'"
+      ],
+      "dependsOn": "Compile C++",
+      "problemMatcher": []
+    }
+  ]
+}
