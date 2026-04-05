@@ -8,6 +8,6 @@ int main()
     cin.tie(nullptr);
     ll t;
     cin >> t;
-
+while(t--){}
     return 0;
 }
